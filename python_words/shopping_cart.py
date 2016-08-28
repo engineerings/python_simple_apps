@@ -1,0 +1,48 @@
+def get_order():
+    print("[command] [item] (command: a - to add, d to delete, q to quit)")
+    line = input()
+    command = line[:1]
+    item = line[2:]
+
+    return command, item
+
+
+def add_item_to_cart(item, cart):
+    if not item in cart:
+        cart[item] = 0
+    cart[item] += 1
+
+
+def delete_item_from_cart(item, cart):
+    if item in cart and cart[item] > 1:
+        cart[item] -= 1
+    if item in cart and cart[item] == 1:
+        del cart[item]
+
+
+def process_order(order, cart):
+    command, item = order
+
+    if command == "a":
+        add_item_to_cart(item, cart)
+    elif command == "d" and item in cart:
+        delete_item_from_cart(item, cart)
+    elif command == "q":
+        return False
+
+    return True
+
+
+def shopping():
+    cart = dict()
+
+    while True:
+        order = get_order()
+        if not process_order(order, cart):
+            break
+
+    print(cart)
+    print("End of shopping")
+
+shopping()
+
