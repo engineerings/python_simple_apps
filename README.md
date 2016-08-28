@@ -1,1 +1,1 @@
-# python_simple_apps
+# python simple apps
